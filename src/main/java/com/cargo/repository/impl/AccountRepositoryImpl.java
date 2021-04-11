@@ -26,7 +26,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account getAccountById(long id) {
         return accounts.stream()
                 .filter(acc -> acc.getId() == id)
-                .findFirst()
+                .findAny()
                 .orElseThrow(NoSuchEmailFoundException::new);
     }
 
@@ -34,7 +34,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account getAccountByEmail(String email) {
         return accounts.stream()
                 .filter(acc -> acc.getEmail().equals(email))
-                .findFirst()
+                .findAny()
                 .orElseThrow(NoSuchEmailFoundException::new);
     }
 
@@ -71,7 +71,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account deleteAccountById(long id) {
         Account account = accounts.stream()
                 .filter(acc -> acc.getId() == id)
-                .findFirst()
+                .findAny()
                 .orElseThrow(NoSuchEmailFoundException::new);
         boolean isDeleted = accounts.remove(account);
         if (isDeleted) {
@@ -84,7 +84,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account deleteAccountByEmail(String email) {
         Account account = accounts.stream()
                 .filter(acc -> acc.getEmail().equals(email))
-                .findFirst()
+                .findAny()
                 .orElseThrow(NoSuchEmailFoundException::new);
         boolean isDeleted = accounts.remove(account);
         if (isDeleted) {
