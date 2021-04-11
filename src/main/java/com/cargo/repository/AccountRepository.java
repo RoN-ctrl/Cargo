@@ -11,7 +11,7 @@ public interface AccountRepository {
 
     Account getAccountByEmail(String email);
 
-    List<Account> getAccountByLastName(String lastName);
+    List<Account> getAccountsByLastName(String lastName);
 
     Account updateAccountById(long id, Account account);
 

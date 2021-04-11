@@ -39,7 +39,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> getAccountByLastName(String lastName) {
+    public List<Account> getAccountsByLastName(String lastName) {
         return accounts.stream()
                 .filter(acc -> acc.getLastName().equals(lastName))
                 .collect((Collectors.toList()));
