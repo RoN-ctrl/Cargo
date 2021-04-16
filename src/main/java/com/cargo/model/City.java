@@ -22,6 +22,7 @@ public class City {
 
     @Column(unique = true)
     @NotBlank(message = "City name is mandatory")
+    //todo @CustomStartsWithUpperCase
     private String name;
 
     @NotNull(message = "City region is mandatory")
