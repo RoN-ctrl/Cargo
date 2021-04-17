@@ -1,6 +1,6 @@
 package com.cargo.dto;
 
-import com.cargo.model.enums.Role;
+import com.cargo.model.enums.Region;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
@@ -8,13 +8,12 @@ import lombok.Data;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountDto {
+public class CityDto {
 
     private long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Role role;
-    private String password;
+    private String name;
+    private Region region;
+    private double longitude;
+    private double latitude;
 
 }

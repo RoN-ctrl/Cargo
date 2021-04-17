@@ -2,7 +2,7 @@
 //
 //import com.cargo.model.City;
 //import com.cargo.model.enums.Region;
-//import com.cargo.repository.exceptions.NoSuchCityFoundException;
+//import com.cargo.exceptions.NoSuchCityFoundException;
 //import org.springframework.stereotype.Repository;
 //
 //import java.util.ArrayList;

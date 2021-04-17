@@ -2,7 +2,7 @@
 //
 //import com.cargo.model.Account;
 //import com.cargo.repository.AccountRepository;
-//import com.cargo.repository.exceptions.NoSuchEmailFoundException;
+//import com.cargo.exceptions.NoSuchEmailFoundException;
 //import org.springframework.stereotype.Repository;
 //
 //import java.util.ArrayList;
