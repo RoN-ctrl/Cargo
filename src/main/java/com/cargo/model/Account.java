@@ -1,6 +1,7 @@
 package com.cargo.model;
 
 import com.cargo.model.enums.Role;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Account {
 

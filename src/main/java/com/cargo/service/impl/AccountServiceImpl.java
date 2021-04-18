@@ -43,7 +43,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountDto> getAccountByLastName(String lastName) {
+    public List<AccountDto> getAccountsByLastName(String lastName) {
         log.info("getting accounts by last name={}", lastName);
         Sort sortByFirstName = Sort.by("firstName");
         List<Account> accounts = accountRepository.findAllByLastName(lastName, sortByFirstName);

@@ -1,6 +1,6 @@
 package com.cargo.exceptions;
 
-public class NoSuchAccountFoundException extends RuntimeException {
+public class NoSuchAccountFoundException extends ServiceException {
 
     private static final String DEFAULT_MESSAGE = "No such account found";
 

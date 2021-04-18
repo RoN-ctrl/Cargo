@@ -11,7 +11,7 @@ public interface AccountService {
 
     AccountDto getAccountByEmail(String email);
 
-    List<AccountDto> getAccountByLastName(String lastName);
+    List<AccountDto> getAccountsByLastName(String lastName);
 
     AccountDto updateAccount(AccountDto accountDto);
 
