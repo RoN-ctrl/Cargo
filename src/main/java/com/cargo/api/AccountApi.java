@@ -31,7 +31,7 @@ public interface AccountApi {
     AccountModel getAccountById(@PathVariable long id);
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "email", paramType = "value", required = true, value = "Account email")
+            @ApiImplicitParam(name = "email", paramType = "path", required = true, value = "Account email")
     })
     @ApiOperation("Get account from database by email")
     @ResponseStatus(HttpStatus.OK)

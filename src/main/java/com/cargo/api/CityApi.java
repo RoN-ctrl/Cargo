@@ -32,7 +32,7 @@ public interface CityApi {
     CityModel getCityById(@PathVariable long id);
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", paramType = "value", required = true, value = "City name")
+            @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "City name")
     })
     @ApiOperation("Get city by name")
     @ResponseStatus(HttpStatus.OK)

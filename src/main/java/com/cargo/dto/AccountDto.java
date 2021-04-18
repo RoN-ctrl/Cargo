@@ -8,6 +8,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -27,6 +28,7 @@ public class AccountDto {
     @Email(message = "Email is not valid")
     private String email;
 
+    @NotNull(message = "Role is mandatory")
     private Role role;
 
     @Size(message = "Password should contain 8 symbols or more", min = 8)

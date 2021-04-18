@@ -5,10 +5,12 @@ import com.cargo.controller.model.CityModel;
 import com.cargo.dto.CityDto;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@Component
 public class CityAssembler extends RepresentationModelAssemblerSupport<CityDto, CityModel> {
 
     public CityAssembler() {
