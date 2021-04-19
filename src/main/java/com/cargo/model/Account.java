@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Builder
@@ -33,9 +34,14 @@ public class Account {
     private String lastName;
 
     @Column(unique = true)
+    @NotBlank(message = "Email is mandatory")
     @Email(message = "Email is not valid")
     private String email;
 
     @Size(message = "Password should contain 8 symbols or more", min = 8)
     private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    private List<Parcel> parcelsAccount;
+
 }
