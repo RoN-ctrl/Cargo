@@ -52,7 +52,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
         }
         String ip = request.getHeader("X-FORWARDED-FOR");
         String ipAddr = (ip == null) ? getRemoteAddr(request) : ip;
-        if (ipAddr!=null && !ipAddr.equals("")) {
+        if (ipAddr != null && !ipAddr.equals("")) {
             posted.append("&_psip=" + ipAddr);
         }
         return posted.toString();
