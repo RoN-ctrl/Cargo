@@ -1,5 +1,6 @@
 package com.cargo.model;
 
+import com.cargo.annotations.CityNameCheck;
 import com.cargo.model.enums.Region;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,7 @@ public class City {
 
     @Column(unique = true)
     @NotBlank(message = "City name is mandatory")
-    //todo @CustomStartsWithUpperCase
+    @CityNameCheck
     private String name;
 
     @NotNull(message = "City region is mandatory")

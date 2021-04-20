@@ -3,7 +3,6 @@ package com.cargo.api;
 import com.cargo.controller.model.AccountModel;
 import com.cargo.dto.AccountDto;
 import com.cargo.dto.ParcelDto;
-import com.cargo.model.Parcel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

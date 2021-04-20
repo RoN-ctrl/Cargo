@@ -3,7 +3,6 @@ package com.cargo.service;
 import com.cargo.dto.AccountDto;
 import com.cargo.dto.ParcelDto;
 import com.cargo.model.Account;
-import com.cargo.model.Parcel;
 
 import java.util.List;
 

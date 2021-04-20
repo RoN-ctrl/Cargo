@@ -1,5 +1,6 @@
 package com.cargo.dto;
 
+import com.cargo.annotations.CityNameCheck;
 import com.cargo.model.enums.Region;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class CityDto {
 
     @Column(unique = true)
     @NotBlank(message = "City name is mandatory")
+    @CityNameCheck
     private String name;
 
     @NotNull(message = "City region is mandatory")
