@@ -88,7 +88,6 @@ public class ParcelServiceImpl implements ParcelService {
         return ParcelDto.builder()
                 .id(parcel.getId())
                 .status(parcel.getStatus())
-//                .account(parcel.getAccount())
                 .fromCity(parcel.getFromCity())
                 .toCity(parcel.getToCity())
                 .description(parcel.getDescription())
@@ -98,7 +97,8 @@ public class ParcelServiceImpl implements ParcelService {
                 .build();
     }
 
-    private Parcel mapParcelDtoToParcel(ParcelDto parcelDto) {
+    @Override
+    public Parcel mapParcelDtoToParcel(ParcelDto parcelDto) {
         return Parcel.builder()
                 .status(parcelDto.getStatus())
                 .account(parcelDto.getAccount())

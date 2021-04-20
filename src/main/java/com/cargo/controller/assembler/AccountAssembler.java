@@ -24,11 +24,14 @@ public class AccountAssembler extends RepresentationModelAssemblerSupport<Accoun
         Link create = linkTo(methodOn(AccountController.class).createAccount(entity)).withRel("crete");
         Link getById = linkTo(methodOn(AccountController.class).getAccountById(entity.getId())).withRel("get");
         Link getByEmail = linkTo(methodOn(AccountController.class).getAccountByEmail(entity.getEmail())).withRel("get");
-        Link getByLastName = linkTo(methodOn(AccountController.class).createAccount(entity)).withRel("get");
+        Link getByLastName = linkTo(methodOn(AccountController.class)
+                .getAccountsByLastName(entity.getLastName())).withRel("get");
+        Link getAccountParcels = linkTo(methodOn(AccountController.class)
+                .getAccountParcels(entity.getId())).withRel("get");
         Link update = linkTo(methodOn(AccountController.class).updateAccount(entity)).withRel("update");
         Link deleteById = linkTo(methodOn(AccountController.class).deleteAccountById(entity.getId())).withRel("delete");
 
-        accountModel.add(create, getById, getByEmail, getByLastName, update, deleteById);
+        accountModel.add(create, getById, getByEmail, getByLastName, getAccountParcels, update, deleteById);
 
         return accountModel;
     }

@@ -76,7 +76,8 @@ public class CityServiceImpl implements CityService {
         cityRepository.delete(city);
     }
 
-    private City mapCityDtoToCity(CityDto cityDto) {
+    @Override
+    public City mapCityDtoToCity(CityDto cityDto) {
         return City.builder()
                 .name(cityDto.getName())
                 .region(cityDto.getRegion())
@@ -85,7 +86,8 @@ public class CityServiceImpl implements CityService {
                 .build();
     }
 
-    private CityDto mapCityToCityDto(City city) {
+    @Override
+    public CityDto mapCityToCityDto(City city) {
         return CityDto.builder()
                 .id(city.getId())
                 .name(city.getName())

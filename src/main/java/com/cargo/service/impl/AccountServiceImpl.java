@@ -93,7 +93,8 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.delete(account);
     }
 
-    private AccountDto mapAccountToAccountDto(Account account) {
+    @Override
+    public AccountDto mapAccountToAccountDto(Account account) {
         return AccountDto.builder()
                 .id(account.getId())
                 .firstName(account.getFirstName())
@@ -103,7 +104,8 @@ public class AccountServiceImpl implements AccountService {
                 .build();
     }
 
-    private Account mapAccountDtoToAccount(AccountDto accountDto) {
+    @Override
+    public Account mapAccountDtoToAccount(AccountDto accountDto) {
         return Account.builder()
                 .firstName(accountDto.getFirstName())
                 .lastName(accountDto.getLastName())

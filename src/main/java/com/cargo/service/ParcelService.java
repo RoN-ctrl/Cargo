@@ -20,4 +20,6 @@ public interface ParcelService {
     void deleteParcelById(long id);
 
     ParcelDto mapParcelToParcelDto(Parcel parcel);
+
+    Parcel mapParcelDtoToParcel(ParcelDto parcelDto);
 }
