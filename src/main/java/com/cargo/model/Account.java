@@ -1,10 +1,7 @@
 package com.cargo.model;
 
 import com.cargo.model.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -41,6 +38,7 @@ public class Account {
     @Size(message = "Password should contain 8 symbols or more", min = 8)
     private String password;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
     private List<Parcel> parcelsAccount;
 

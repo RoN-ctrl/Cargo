@@ -6,6 +6,7 @@ import com.cargo.model.enums.ParcelStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -20,6 +21,8 @@ public class ParcelDto {
 
     private long id;
 
+    @NotNull
+    @ColumnDefault(value = "STATUS_NEW")
     private ParcelStatus status;
 
     @NotNull(message = "Account is mandatory")

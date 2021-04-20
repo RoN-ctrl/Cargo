@@ -34,11 +34,11 @@ public class ErrorHandlingController {
         return new Error(e.getMessage(), e.getErrorType(), LocalDateTime.now());
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Error handleException(Exception e) {
-        log.error("handleException: message={}", e.getMessage());
-        return new Error(e.getMessage(), ErrorType.FATAL_ERROR_TYPE, LocalDateTime.now());
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public Error handleException(Exception e) {
+//        log.error("handleException: message={}", e.getMessage());
+//        return new Error(e.getMessage(), ErrorType.FATAL_ERROR_TYPE, LocalDateTime.now());
+//    }
 
 }

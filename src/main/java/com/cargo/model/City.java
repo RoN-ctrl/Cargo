@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.util.List;
 
 @Data
 @Builder
@@ -38,11 +37,5 @@ public class City {
     @NotNull(message = "Latitude is mandatory")
     @Positive(message = "Latitude is not valid")
     private double latitude;
-
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "toCity")
-//    private List<Parcel> parcelsTo;
-//
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fromCity")
-//    private List<Parcel> parcelsFrom;
 
 }

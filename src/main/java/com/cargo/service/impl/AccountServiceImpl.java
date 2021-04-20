@@ -1,10 +1,13 @@
 package com.cargo.service.impl;
 
 import com.cargo.dto.AccountDto;
+import com.cargo.dto.ParcelDto;
+import com.cargo.exceptions.NoSuchAccountFoundException;
 import com.cargo.model.Account;
+import com.cargo.model.Parcel;
 import com.cargo.repository.AccountRepository;
 import com.cargo.service.AccountService;
-import com.cargo.exceptions.NoSuchAccountFoundException;
+import com.cargo.service.ParcelService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
@@ -19,6 +22,7 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final ParcelService parcelService;
 
     @Override
     public AccountDto createAccount(AccountDto accountDto) {
@@ -55,6 +59,21 @@ public class AccountServiceImpl implements AccountService {
 
         return accountDtos;
     }
+
+    @Override
+    public List<ParcelDto> getAccountParcels(long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new NoSuchAccountFoundException("No account with such ID found"));
+        List<Parcel> parcelsAccount = account.getParcelsAccount();
+        List<ParcelDto> parcelDtos = new ArrayList<>();
+
+        for (Parcel parcel : parcelsAccount) {
+            parcelDtos.add(parcelService.mapParcelToParcelDto(parcel));
+        }
+
+        return parcelDtos;
+    }
+
 
     @Override
     public AccountDto updateAccount(AccountDto accountDto) {

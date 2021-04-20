@@ -1,6 +1,8 @@
 package com.cargo.service;
 
 import com.cargo.dto.AccountDto;
+import com.cargo.dto.ParcelDto;
+import com.cargo.model.Parcel;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public interface AccountService {
     AccountDto getAccountByEmail(String email);
 
     List<AccountDto> getAccountsByLastName(String lastName);
+
+    List<ParcelDto> getAccountParcels(long id);
 
     AccountDto updateAccount(AccountDto accountDto);
 

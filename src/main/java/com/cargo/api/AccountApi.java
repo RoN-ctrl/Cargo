@@ -2,6 +2,8 @@ package com.cargo.api;
 
 import com.cargo.controller.model.AccountModel;
 import com.cargo.dto.AccountDto;
+import com.cargo.dto.ParcelDto;
+import com.cargo.model.Parcel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -45,6 +47,14 @@ public interface AccountApi {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/lastName/{lastName}")
     List<AccountModel> getAccountsByLastName(@PathVariable String lastName);
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "Account id")
+    })
+    @ApiOperation("Get get all accounts parcels by account id")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{id}/parcels")
+    List<ParcelDto> getAccountParcels(@PathVariable long id);
 
     @ApiOperation("Update account")
     @ResponseStatus(HttpStatus.OK)

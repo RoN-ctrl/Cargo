@@ -5,15 +5,31 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CityDto {
 
     private long id;
+
+    @Column(unique = true)
+    @NotBlank(message = "City name is mandatory")
     private String name;
+
+    @NotNull(message = "City region is mandatory")
     private Region region;
+
+    @NotNull(message = "Longitude is mandatory")
+    @Positive(message = "Longitude is not valid")
     private double longitude;
+
+    @NotNull(message = "Latitude is mandatory")
+    @Positive(message = "Latitude is not valid")
     private double latitude;
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 
-    CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
     @Override
     public CityDto createCity(CityDto cityDto) {

@@ -1,6 +1,5 @@
 package com.cargo.service.impl;
 
-import com.cargo.dto.AccountDto;
 import com.cargo.dto.ParcelDto;
 import com.cargo.exceptions.NoSuchParcelFoundException;
 import com.cargo.model.Parcel;
@@ -37,11 +36,12 @@ public class ParcelServiceImpl implements ParcelService {
                 .orElseThrow(() -> new NoSuchParcelFoundException("No parcel with such ID found")));
     }
 
+    //todo sort by date
     @Override
-    public List<ParcelDto> getParcelsByAccount(AccountDto account) {
-        log.info("getting parcels by account={}", account);
-        Sort sortByAccount = Sort.by("account");
-        List<Parcel> parcels = parcelRepository.findAllByAccount(account, sortByAccount);
+    public List<ParcelDto> getParcelsByAccountId(long id) {
+        log.info("getting parcels by account id={}", id);
+        Sort sortByAccount = Sort.by("id");
+        List<Parcel> parcels = parcelRepository.findAllByAccount_Id(id, sortByAccount);
         List<ParcelDto> parcelDtos = new ArrayList<>();
 
         for (Parcel parcel : parcels) {
@@ -83,11 +83,12 @@ public class ParcelServiceImpl implements ParcelService {
         parcelRepository.delete(parcel);
     }
 
-    private ParcelDto mapParcelToParcelDto(Parcel parcel) {
+    @Override
+    public ParcelDto mapParcelToParcelDto(Parcel parcel) {
         return ParcelDto.builder()
                 .id(parcel.getId())
                 .status(parcel.getStatus())
-                .account(parcel.getAccount())
+//                .account(parcel.getAccount())
                 .fromCity(parcel.getFromCity())
                 .toCity(parcel.getToCity())
                 .description(parcel.getDescription())

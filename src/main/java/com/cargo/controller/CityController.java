@@ -19,8 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CityController implements CityApi {
 
-    private CityService cityService;
-    private CityAssembler cityAssembler;
+    private final CityService cityService;
+    private final CityAssembler cityAssembler;
 
     @Override
     public CityModel createCity(CityDto cityDto) {

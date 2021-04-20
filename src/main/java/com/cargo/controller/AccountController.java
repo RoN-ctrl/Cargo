@@ -4,6 +4,7 @@ import com.cargo.api.AccountApi;
 import com.cargo.controller.assembler.AccountAssembler;
 import com.cargo.controller.model.AccountModel;
 import com.cargo.dto.AccountDto;
+import com.cargo.dto.ParcelDto;
 import com.cargo.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +54,11 @@ public class AccountController implements AccountApi {
         }
 
         return accountModels;
+    }
+
+    @Override
+    public List<ParcelDto> getAccountParcels(long id) {
+        return accountService.getAccountParcels(id);
     }
 
     @Override
