@@ -37,19 +37,6 @@ public class ParcelController implements ParcelApi {
     }
 
     @Override
-    public List<ParcelModel> getParcelsByAccountId(long id) {
-        log.info("controller: getParcelsByAccountId={}", id);
-        List<ParcelDto> parcels = parcelService.getParcelsByAccountId(id);
-        List<ParcelModel> parcelModels = new ArrayList<>();
-
-        for (ParcelDto parcel : parcels) {
-            parcelModels.add(parcelAssembler.toModel(parcel));
-        }
-
-        return parcelModels;
-    }
-
-    @Override
     public List<ParcelModel> getParcelsByStatus(ParcelStatus status) {
         log.info("controller: getParcelsByStatus={}", status);
         List<ParcelDto> parcels = parcelService.getParcelsByStatus(status);

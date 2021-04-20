@@ -32,14 +32,6 @@ public interface ParcelApi {
     ParcelModel getParcelById(@PathVariable long id);
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "Parcels account id")
-    })
-    @ApiOperation("Get parcel by account id")
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/all/{id}")
-    List<ParcelModel> getParcelsByAccountId(@PathVariable long id);
-
-    @ApiImplicitParams({
             @ApiImplicitParam(name = "status", paramType = "path", required = true, value = "Parcel status")
     })
     @ApiOperation("Get parcel by status")

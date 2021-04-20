@@ -11,8 +11,6 @@ public interface ParcelService {
 
     ParcelDto getParcelById(long id);
 
-    List<ParcelDto> getParcelsByAccountId(long id);
-
     List<ParcelDto> getParcelsByStatus(ParcelStatus status);
 
     ParcelDto updateParcel(ParcelDto parcelDto);

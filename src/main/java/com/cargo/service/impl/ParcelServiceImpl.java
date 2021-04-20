@@ -36,21 +36,6 @@ public class ParcelServiceImpl implements ParcelService {
                 .orElseThrow(() -> new NoSuchParcelFoundException("No parcel with such ID found")));
     }
 
-    //todo sort by date
-    @Override
-    public List<ParcelDto> getParcelsByAccountId(long id) {
-        log.info("getting parcels by account id={}", id);
-        Sort sortByAccount = Sort.by("id");
-        List<Parcel> parcels = parcelRepository.findAllByAccount_Id(id, sortByAccount);
-        List<ParcelDto> parcelDtos = new ArrayList<>();
-
-        for (Parcel parcel : parcels) {
-            parcelDtos.add(mapParcelToParcelDto(parcel));
-        }
-
-        return parcelDtos;
-    }
-
     @Override
     public List<ParcelDto> getParcelsByStatus(ParcelStatus status) {
         log.info("getting parcels by status={}", status);
