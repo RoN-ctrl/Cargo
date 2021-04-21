@@ -11,9 +11,28 @@ spring:
 
 management:
   endpoints:
-    jmx:
+    web:
       exposure:
         include: '*'
   endpoint:
     health:
       show-details: always
+
+info:
+  app:
+    name: Cargo Delivery Application
+    description: This cargo delivery application helps to teleport your parcels to any place, where we have our offices
+    owner:
+      company: Cargo Delivery corp.
+      headquarters: Lviv
+  build:
+    groupId: @project.groupId@
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+  env:
+    java:
+      vendor: ${java.specification.vendor}
+      vm-name: ${java.vm.name}
+      runtime-version: ${java.runtime.version}
