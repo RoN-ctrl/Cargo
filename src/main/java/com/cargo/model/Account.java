@@ -14,7 +14,7 @@ import java.util.List;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private Role role = Role.ROLE_USER;
@@ -25,6 +25,7 @@ public class Account {
 
     private String email;
 
+    @ToString.Exclude
     private String password;
 
     @ToString.Exclude
