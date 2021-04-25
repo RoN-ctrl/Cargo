@@ -3,7 +3,10 @@ package com.cargo.service;
 import com.cargo.dto.CityDto;
 import com.cargo.model.City;
 import com.cargo.model.enums.Region;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CityService {
@@ -15,6 +18,7 @@ public interface CityService {
 
     List<CityDto> getCitiesByRegion(Region region);
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
     CityDto updateCity(CityDto cityDto);
 
     void deleteCityById(long id);

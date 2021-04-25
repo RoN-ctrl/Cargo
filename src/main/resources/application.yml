@@ -9,6 +9,11 @@ spring:
     hibernate.ddl-auto: update
     show-sql: true
 
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG
+
 management:
   endpoints:
     web:

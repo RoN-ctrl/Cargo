@@ -8,7 +8,6 @@ import com.cargo.repository.ParcelRepository;
 import com.cargo.service.ParcelService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,8 +38,7 @@ public class ParcelServiceImpl implements ParcelService {
     @Override
     public List<ParcelDto> getParcelsByStatus(ParcelStatus status) {
         log.info("getting parcels by status={}", status);
-        Sort sortByStatus = Sort.by("status");
-        List<Parcel> parcels = parcelRepository.findAllByStatus(status, sortByStatus);
+        List<Parcel> parcels = parcelRepository.findAllByStatus(status);
         List<ParcelDto> parcelDtos = new ArrayList<>();
 
         for (Parcel parcel : parcels) {
