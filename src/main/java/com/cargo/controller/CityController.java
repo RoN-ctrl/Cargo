@@ -57,9 +57,9 @@ public class CityController implements CityApi {
     }
 
     @Override
-    public CityModel updateCity(CityDto cityDto) {
+    public CityModel updateCity(long id, CityDto cityDto) {
         log.info("controller: updateCity={}", cityDto);
-        CityDto city = cityService.updateCity(cityDto);
+        CityDto city = cityService.updateCity(id, cityDto);
         return cityAssembler.toModel(city);
     }
 

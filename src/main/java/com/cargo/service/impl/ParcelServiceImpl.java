@@ -49,8 +49,8 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
     @Override
-    public ParcelDto updateParcel(ParcelDto parcelDto) {
-        parcelRepository.delete(parcelRepository.findById(parcelDto.getId())
+    public ParcelDto updateParcel(long id, ParcelDto parcelDto) {
+        parcelRepository.delete(parcelRepository.findById(id)
                 .orElseThrow(NoSuchParcelFoundException::new));
         Parcel parcel = mapParcelDtoToParcel(parcelDto);
         parcel = parcelRepository.save(parcel);

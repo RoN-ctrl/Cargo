@@ -41,8 +41,8 @@ public interface ParcelApi {
 
     @ApiOperation("Update parcel")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping
-    ParcelModel updateParcel(ParcelDto parcelDto);
+    @PutMapping("/{id}")
+    ParcelModel updateParcel(@PathVariable long id, @Valid @RequestBody ParcelDto parcelDto);
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "Parcel id")

@@ -57,8 +57,8 @@ public interface AccountApi {
 
     @ApiOperation("Update account")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping
-    AccountModel updateAccount(@Valid @RequestBody AccountDto accountDto);
+    @PutMapping("/{id}")
+    AccountModel updateAccount(@PathVariable long id, @Valid @RequestBody AccountDto accountDto);
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "Account id")

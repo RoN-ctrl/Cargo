@@ -25,7 +25,7 @@ public class CityAssembler extends RepresentationModelAssemblerSupport<CityDto, 
         Link getById = linkTo(methodOn(CityController.class).getCityById(entity.getId())).withRel("get");
         Link getByName = linkTo(methodOn(CityController.class).getCityByName(entity.getName())).withRel("get");
         Link getByRegion = linkTo(methodOn(CityController.class).getCitiesByRegion(entity.getRegion())).withRel("get");
-        Link update = linkTo(methodOn(CityController.class).updateCity(entity)).withRel("update");
+        Link update = linkTo(methodOn(CityController.class).updateCity(entity.getId(), entity)).withRel("update");
         Link deleteByID = linkTo(methodOn(CityController.class).deleteCityById(entity.getId())).withRel("delete");
 
         cityModel.add(create, getById, getByName, getByRegion, update, deleteByID);

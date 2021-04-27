@@ -59,7 +59,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public CityDto updateCity(CityDto cityDto) {
+    public CityDto updateCity(long id, CityDto cityDto) {
         cityRepository.delete(cityRepository.findByName(cityDto.getName())
                 .orElseThrow(NoSuchAccountFoundException::new));
         City city = mapCityDtoToCity(cityDto);

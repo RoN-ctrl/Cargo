@@ -24,7 +24,6 @@ public class AccountDto {
     @NotBlank(message = "Last Name is mandatory")
     private String lastName;
 
-    @Column(unique = true)
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email is not valid")
     private String email;

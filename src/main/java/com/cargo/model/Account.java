@@ -23,6 +23,7 @@ public class Account {
 
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
     @ToString.Exclude

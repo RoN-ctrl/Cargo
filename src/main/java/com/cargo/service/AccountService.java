@@ -21,7 +21,7 @@ public interface AccountService {
     List<ParcelDto> getAccountParcels(long id);
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
-    AccountDto updateAccount(AccountDto accountDto);
+    AccountDto updateAccount(long id, AccountDto accountDto);
 
     void deleteAccountById(long id);
 

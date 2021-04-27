@@ -74,10 +74,9 @@ public class AccountServiceImpl implements AccountService {
         return parcelDtos;
     }
 
-
     @Override
-    public AccountDto updateAccount(AccountDto accountDto) {
-        accountRepository.delete(accountRepository.findByEmail(accountDto.getEmail())
+    public AccountDto updateAccount(long id, AccountDto accountDto) {
+        accountRepository.delete(accountRepository.findById(id)
                 .orElseThrow(NoSuchAccountFoundException::new));
         Account account = mapAccountDtoToAccount(accountDto);
         account = accountRepository.save(account);

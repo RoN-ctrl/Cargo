@@ -50,9 +50,9 @@ public class ParcelController implements ParcelApi {
     }
 
     @Override
-    public ParcelModel updateParcel(ParcelDto parcelDto) {
+    public ParcelModel updateParcel(long id, ParcelDto parcelDto) {
         log.info("controller: updateParcel={}", parcelDto);
-        ParcelDto parcel = parcelService.updateParcel(parcelDto);
+        ParcelDto parcel = parcelService.updateParcel(id, parcelDto);
         return parcelAssembler.toModel(parcel);
     }
 

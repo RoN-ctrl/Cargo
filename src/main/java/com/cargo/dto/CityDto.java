@@ -18,7 +18,6 @@ public class CityDto {
 
     private long id;
 
-    @Column(unique = true)
     @NotBlank(message = "City name is mandatory")
     @CityNameCheck
     private String name;

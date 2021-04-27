@@ -19,7 +19,7 @@ public interface CityService {
     List<CityDto> getCitiesByRegion(Region region);
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
-    CityDto updateCity(CityDto cityDto);
+    CityDto updateCity(long id, CityDto cityDto);
 
     void deleteCityById(long id);
 

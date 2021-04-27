@@ -62,9 +62,9 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public AccountModel updateAccount(AccountDto accountDto) {
+    public AccountModel updateAccount(long id, AccountDto accountDto) {
         log.info("controller: updateAccount={}", accountDto);
-        AccountDto account = accountService.updateAccount(accountDto);
+        AccountDto account = accountService.updateAccount(id, accountDto);
         return accountAssembler.toModel(account);
     }
 

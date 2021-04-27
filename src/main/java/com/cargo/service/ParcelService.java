@@ -17,7 +17,7 @@ public interface ParcelService {
     List<ParcelDto> getParcelsByStatus(ParcelStatus status);
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
-    ParcelDto updateParcel(ParcelDto parcelDto);
+    ParcelDto updateParcel(long id, ParcelDto parcelDto);
 
     void deleteParcelById(long id);
 

@@ -49,8 +49,8 @@ public interface CityApi {
 
     @ApiOperation("Update city")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping
-    CityModel updateCity(@Valid @RequestBody CityDto cityDto);
+    @PutMapping("/{id}")
+    CityModel updateCity(@PathVariable long id, @Valid @RequestBody CityDto cityDto);
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "City id")

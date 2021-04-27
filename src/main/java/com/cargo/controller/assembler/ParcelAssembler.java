@@ -25,7 +25,7 @@ public class ParcelAssembler extends RepresentationModelAssemblerSupport<ParcelD
         Link getById = linkTo(methodOn(ParcelController.class).getParcelById(entity.getId())).withRel("get");
         Link getByStatus = linkTo(methodOn(ParcelController.class)
                 .getParcelsByStatus(entity.getStatus())).withRel("get");
-        Link update = linkTo(methodOn(ParcelController.class).updateParcel(entity)).withRel("update");
+        Link update = linkTo(methodOn(ParcelController.class).updateParcel(entity.getId(), entity)).withRel("update");
         Link deleteByID = linkTo(methodOn(ParcelController.class).deleteParcelById(entity.getId())).withRel("delete");
 
         parcelModel.add(create, getById, getByStatus, update, deleteByID);
