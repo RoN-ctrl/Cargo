@@ -2,13 +2,17 @@ package com.cargo.service.impl;
 
 import com.cargo.dto.AccountDto;
 import com.cargo.model.Account;
+import com.cargo.model.enums.Role;
 import com.cargo.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,7 +25,7 @@ class AccountServiceImplTest {
     private static final String FIRST_NAME = "FirstName";
     private static final String LAST_NAME = "LastName";
     private static final String EMAIL = "email@ukr.net";
-    private static final long ID = 1;
+    private static final long ID = 0;
 
     @InjectMocks
     private AccountServiceImpl accountService;
@@ -35,23 +39,39 @@ class AccountServiceImplTest {
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)
                 .email(EMAIL)
+                .role(Role.ROLE_USER)
                 .build();
     }
 
     private AccountDto testCreateAccountDto() {
         return AccountDto.builder()
+                .id(ID)
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)
                 .email(EMAIL)
+                .role(Role.ROLE_USER)
                 .build();
     }
 
     @Test
-    void createAccount() {
+    void shouldCreateAccount() {
+        Account account = testCreateAccount();
+        AccountDto accountDto = testCreateAccountDto();
+        when(accountRepository.save(account)).thenReturn(account);
+
+        AccountDto testAccountDto = accountService.createAccount(accountDto);
+
+        assertThat(testAccountDto, allOf(
+                hasProperty("id", equalTo(account.getId())),
+                hasProperty("firstName", equalTo(account.getFirstName())),
+                hasProperty("lastName", equalTo(account.getLastName())),
+                hasProperty("email", equalTo(account.getEmail()))
+        ));
+
     }
 
     @Test
-    void getAccountById() {
+    void shouldGetAccountById() {
         Account account = testCreateAccount();
         when(accountRepository.findById(ID)).thenReturn(Optional.of(account));
 
@@ -67,7 +87,7 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void getAccountByEmail() {
+    void shouldGetAccountByEmail() {
         Account account = testCreateAccount();
         when(accountRepository.findByEmail(EMAIL)).thenReturn(Optional.of(account));
 
@@ -83,7 +103,16 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void getAccountsByLastName() {
+    void shouldGetAccountsByLastName() {
+        List<Account> accounts = new ArrayList<>();
+        Account account = testCreateAccount();
+        accounts.add(account);
+        when(accountRepository.findAllByLastName(LAST_NAME, Sort.by("firstName"))).thenReturn(accounts);
+
+        List<AccountDto> accountDtos = accountService.getAccountsByLastName(LAST_NAME);
+
+        assertThat(accountDtos.size(), equalTo(accounts.size()));
+
     }
 
     @Test
@@ -92,18 +121,36 @@ class AccountServiceImplTest {
 
     @Test
     void updateAccount() {
+        Account account = testCreateAccount();
+        AccountDto newAccount = AccountDto.builder()
+                .id(3)
+                .firstName("New First Name")
+                .lastName("New Last Name")
+                .email("New Email")
+                .role(Role.ROLE_USER)
+                .build();
+
+        when(accountRepository.save(account)).thenReturn(account);
+
+        AccountDto accountDto = accountService.updateAccount(account.getId(), newAccount);
+
+        assertThat(account, allOf(
+                hasProperty("id", equalTo(account.getId())),
+                hasProperty("firstName", equalTo(account.getFirstName())),
+                hasProperty("lastName", equalTo(account.getLastName())),
+                hasProperty("email", equalTo(account.getEmail()))
+        ));
+        assertThat(accountDto, allOf(
+                hasProperty("id", equalTo(newAccount.getId())),
+                hasProperty("firstName", equalTo(newAccount.getFirstName())),
+                hasProperty("lastName", equalTo(newAccount.getLastName())),
+                hasProperty("email", equalTo(newAccount.getEmail()))
+        ));
+
     }
 
     @Test
     void deleteAccountById() {
-    }
-
-    @Test
-    void mapAccountToAccountDto() {
-    }
-
-    @Test
-    void mapAccountDtoToAccount() {
     }
 
 }
