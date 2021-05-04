@@ -21,6 +21,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
+    public static final String NO_ACCOUNT_WITH_SUCH_ID_FOUND = "No account with such ID found";
+    public static final String NO_ACCOUNT_WITH_SUCH_EMAIL_FOUND = "No account with such EMAIL found";
+
     private final AccountRepository accountRepository;
     private final ParcelService parcelService;
 
@@ -36,14 +39,14 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto getAccountById(long id) {
         log.info("getting account by id={}", id);
         return mapAccountToAccountDto(accountRepository.findById(id)
-                .orElseThrow(() -> new NoSuchAccountFoundException("No account with such ID found")));
+                .orElseThrow(() -> new NoSuchAccountFoundException(NO_ACCOUNT_WITH_SUCH_ID_FOUND)));
     }
 
     @Override
     public AccountDto getAccountByEmail(String email) {
         log.info("getting account by email={}", email);
         return mapAccountToAccountDto(accountRepository.findByEmail(email)
-                .orElseThrow(() -> new NoSuchAccountFoundException("No account with such EMAIL found")));
+                .orElseThrow(() -> new NoSuchAccountFoundException(NO_ACCOUNT_WITH_SUCH_EMAIL_FOUND)));
     }
 
     @Override
@@ -63,7 +66,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<ParcelDto> getAccountParcels(long id) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NoSuchAccountFoundException("No account with such ID found"));
+                .orElseThrow(() -> new NoSuchAccountFoundException(NO_ACCOUNT_WITH_SUCH_ID_FOUND));
         List<Parcel> parcelsAccount = account.getParcelsAccount();
         List<ParcelDto> parcelDtos = new ArrayList<>();
 
@@ -87,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccountById(long id) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NoSuchAccountFoundException("No account with such ID found"));
+                .orElseThrow(() -> new NoSuchAccountFoundException(NO_ACCOUNT_WITH_SUCH_ID_FOUND));
         log.info("deleting account={}", account);
         accountRepository.delete(account);
     }

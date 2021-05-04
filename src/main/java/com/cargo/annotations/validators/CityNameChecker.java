@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class CityNameChecker implements ConstraintValidator<CityNameCheck, String> {
 
-    static final String CITY_REGEX = "^\\p{Lu}\\p{Ll}+( \\p{Lu}\\p{Ll}+)*$";
+    static final String CITY_REGEX = "^\\p{Lu}\\p{Ll}+[ \\-\\p{Lu}\\p{Ll}+]*$";
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
