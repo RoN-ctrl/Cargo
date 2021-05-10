@@ -6,6 +6,7 @@ import com.cargo.model.enums.Role;
 import com.cargo.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -17,14 +18,16 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@ExtendWith({MockitoExtension.class})
+@ExtendWith(MockitoExtension.class)
 class AccountServiceImplTest {
 
     private static final String FIRST_NAME = "FirstName";
     private static final String LAST_NAME = "LastName";
     private static final String EMAIL = "email@ukr.net";
+    private static final Role ROLE = Role.ROLE_USER;
     private static final long ID = 0;
 
     @InjectMocks
@@ -39,7 +42,7 @@ class AccountServiceImplTest {
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)
                 .email(EMAIL)
-                .role(Role.ROLE_USER)
+                .role(ROLE)
                 .build();
     }
 
@@ -49,7 +52,7 @@ class AccountServiceImplTest {
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)
                 .email(EMAIL)
-                .role(Role.ROLE_USER)
+                .role(ROLE)
                 .build();
     }
 
@@ -116,23 +119,21 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void getAccountParcels() {
-    }
-
-    @Test
-    void updateAccount() {
+    void shouldUpdateAccount() {
         Account account = testCreateAccount();
         AccountDto newAccount = AccountDto.builder()
-                .id(3)
                 .firstName("New First Name")
                 .lastName("New Last Name")
                 .email("New Email")
                 .role(Role.ROLE_USER)
                 .build();
 
-        when(accountRepository.save(account)).thenReturn(account);
 
-        AccountDto accountDto = accountService.updateAccount(account.getId(), newAccount);
+        when(accountRepository.findById(ID)).thenReturn(Optional.of(account));
+        when(accountRepository.save(ArgumentMatchers.any(Account.class)))
+                .thenReturn(accountService.mapAccountDtoToAccount(newAccount));
+
+        AccountDto accountDto = accountService.updateAccount(0, newAccount);
 
         assertThat(account, allOf(
                 hasProperty("id", equalTo(account.getId())),
@@ -150,7 +151,46 @@ class AccountServiceImplTest {
     }
 
     @Test
-    void deleteAccountById() {
+    void shouldDeleteAccountById() {
+        Account account = testCreateAccount();
+
+        when(accountRepository.findById(ID)).thenReturn(Optional.of(account));
+
+        accountService.deleteAccountById(ID);
+
+        verify(accountRepository).delete(account);
+
     }
 
+    @Test
+    void shouldReturnAccountDto_whenGivenAccount() {
+        Account account = testCreateAccount();
+
+        AccountDto accountDto = accountService.mapAccountToAccountDto(account);
+
+        assertThat(accountDto, allOf(
+                hasProperty("id", equalTo(account.getId())),
+                hasProperty("firstName", equalTo(account.getFirstName())),
+                hasProperty("lastName", equalTo(account.getLastName())),
+                hasProperty("email", equalTo(account.getEmail())),
+                hasProperty("role", equalTo(account.getRole()))
+        ));
+
+    }
+
+    @Test
+    void shouldReturnAccount_whenGivenAccountDto() {
+        AccountDto accountDto = testCreateAccountDto();
+
+        Account account = accountService.mapAccountDtoToAccount(accountDto);
+
+        assertThat(account, allOf(
+                hasProperty("id", equalTo(accountDto.getId())),
+                hasProperty("firstName", equalTo(accountDto.getFirstName())),
+                hasProperty("lastName", equalTo(accountDto.getLastName())),
+                hasProperty("email", equalTo(accountDto.getEmail())),
+                hasProperty("role", equalTo(accountDto.getRole()))
+        ));
+
+    }
 }
