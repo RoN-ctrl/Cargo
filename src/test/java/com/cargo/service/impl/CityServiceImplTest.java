@@ -31,10 +31,10 @@ class CityServiceImplTest {
     private static final double LATITUDE = 33.3;
 
     @InjectMocks
-    CityServiceImpl cityService;
+    private CityServiceImpl cityService;
 
     @Mock
-    CityRepository cityRepository;
+    private CityRepository cityRepository;
 
     private City testCreateCity() {
         return City.builder()
