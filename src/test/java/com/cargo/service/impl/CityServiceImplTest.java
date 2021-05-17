@@ -160,6 +160,7 @@ class CityServiceImplTest {
         cityService.deleteCityById(ID);
 
         verify(cityRepository).delete(city);
+
     }
 
     @Test
