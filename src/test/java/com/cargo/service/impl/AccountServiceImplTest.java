@@ -128,7 +128,6 @@ class AccountServiceImplTest {
                 .role(Role.ROLE_USER)
                 .build();
 
-
         when(accountRepository.findById(ID)).thenReturn(Optional.of(account));
         when(accountRepository.save(ArgumentMatchers.any(Account.class)))
                 .thenReturn(accountService.mapAccountDtoToAccount(newAccount));
