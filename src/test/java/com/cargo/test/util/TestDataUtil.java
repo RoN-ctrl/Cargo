@@ -15,24 +15,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TestDataUtil {
 
-    private static final long ID = 0;
+    public static final long ID = 0;
 
     //account data
-    private static final String FIRST_NAME = "FirstName";
-    private static final String LAST_NAME = "LastName";
-    private static final String EMAIL = "email@ukr.net";
-    private static final Role ROLE = Role.ROLE_USER;
+    public static final String FIRST_NAME = "FirstName";
+    public static final String LAST_NAME = "LastName";
+    public static final String EMAIL = "email@ukr.net";
+    public static final Role ROLE = Role.ROLE_USER;
 
     //city data
-    private static final String NAME = "Lviv";
-    private static final Region REGION = Region.REGION_EUROPE;
-    private static final double LONGITUDE = 55.5;
-    private static final double LATITUDE = 33.3;
+    public static final String NAME = "Lviv";
+    public static final Region REGION = Region.REGION_EUROPE;
+    public static final double LONGITUDE = 55.5;
+    public static final double LATITUDE = 33.3;
 
     //parcel data
-    private static final ParcelStatus STATUS = ParcelStatus.STATUS_NEW;
-    private static final double VOLUME = 5;
-    private static final double DISTANCE = 500;
+    public static final ParcelStatus STATUS = ParcelStatus.STATUS_NEW;
+    public static final double VOLUME = 5;
+    public static final double DISTANCE = 500;
 
     public static Account testCreateAccount() {
         return Account.builder()
