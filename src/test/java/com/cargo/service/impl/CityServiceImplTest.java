@@ -4,6 +4,7 @@ import com.cargo.dto.CityDto;
 import com.cargo.model.City;
 import com.cargo.model.enums.Region;
 import com.cargo.repository.CityRepository;
+import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.cargo.test.util.TestDataUtil.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.verify;
@@ -24,37 +26,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CityServiceImplTest {
 
-    private static final long ID = 0;
-    private static final String NAME = "Lviv";
-    private static final Region REGION = Region.REGION_EUROPE;
-    private static final double LONGITUDE = 55.5;
-    private static final double LATITUDE = 33.3;
-
     @InjectMocks
     private CityServiceImpl cityService;
 
     @Mock
     private CityRepository cityRepository;
-
-    private City testCreateCity() {
-        return City.builder()
-                .id(ID)
-                .name(NAME)
-                .region(REGION)
-                .longitude(LONGITUDE)
-                .latitude(LATITUDE)
-                .build();
-    }
-
-    private CityDto testCreateCityDto() {
-        return CityDto.builder()
-                .id(ID)
-                .name(NAME)
-                .region(REGION)
-                .longitude(LONGITUDE)
-                .latitude(LATITUDE)
-                .build();
-    }
 
     @Test
     void shouldCreateCity() {
@@ -64,13 +40,7 @@ class CityServiceImplTest {
 
         CityDto testCityDto = cityService.createCity(cityDto);
 
-        assertThat(testCityDto, allOf(
-                hasProperty("id", equalTo(city.getId())),
-                hasProperty("name", equalTo(city.getName())),
-                hasProperty("region", equalTo(city.getRegion())),
-                hasProperty("longitude", equalTo(city.getLongitude())),
-                hasProperty("latitude", equalTo(city.getLatitude()))
-        ));
+        assertThat(testCityDto, getCityMatcher(city));
 
     }
 
@@ -81,13 +51,7 @@ class CityServiceImplTest {
 
         CityDto cityDto = cityService.getCityById(ID);
 
-        assertThat(cityDto, allOf(
-                hasProperty("id", equalTo(city.getId())),
-                hasProperty("name", equalTo(city.getName())),
-                hasProperty("region", equalTo(city.getRegion())),
-                hasProperty("longitude", equalTo(city.getLongitude())),
-                hasProperty("latitude", equalTo(city.getLatitude()))
-        ));
+        assertThat(cityDto, getCityMatcher(city));
 
     }
 
@@ -98,13 +62,7 @@ class CityServiceImplTest {
 
         CityDto cityDto = cityService.getCityByName(NAME);
 
-        assertThat(cityDto, allOf(
-                hasProperty("id", equalTo(city.getId())),
-                hasProperty("name", equalTo(city.getName())),
-                hasProperty("region", equalTo(city.getRegion())),
-                hasProperty("longitude", equalTo(city.getLongitude())),
-                hasProperty("latitude", equalTo(city.getLatitude()))
-        ));
+        assertThat(cityDto, getCityMatcher(city));
 
     }
 
@@ -137,12 +95,6 @@ class CityServiceImplTest {
 
         CityDto cityDto = cityService.updateCity(0, newCity);
 
-        assertThat(city, allOf(
-                hasProperty("name", equalTo(city.getName())),
-                hasProperty("region", equalTo(city.getRegion())),
-                hasProperty("longitude", equalTo(city.getLongitude())),
-                hasProperty("latitude", equalTo(city.getLatitude()))
-        ));
         assertThat(cityDto, allOf(
                 hasProperty("name", equalTo(newCity.getName())),
                 hasProperty("region", equalTo(newCity.getRegion())),
@@ -164,6 +116,16 @@ class CityServiceImplTest {
     }
 
     @Test
+    void shouldReturnCityDto_whenGivenCity() {
+        City city = testCreateCity();
+
+        CityDto cityDto = cityService.mapCityToCityDto(city);
+
+        assertThat(cityDto, getCityMatcher(city));
+
+    }
+
+    @Test
     void shouldReturnCity_whenGivenCityDto() {
         CityDto cityDto = testCreateCityDto();
 
@@ -179,19 +141,13 @@ class CityServiceImplTest {
 
     }
 
-    @Test
-    void shouldReturnCityDto_whenGivenCity() {
-        City city = testCreateCity();
-
-        CityDto cityDto = cityService.mapCityToCityDto(city);
-
-        assertThat(cityDto, allOf(
+    private Matcher<CityDto> getCityMatcher(City city) {
+        return allOf(
                 hasProperty("id", equalTo(city.getId())),
                 hasProperty("name", equalTo(city.getName())),
                 hasProperty("region", equalTo(city.getRegion())),
                 hasProperty("longitude", equalTo(city.getLongitude())),
                 hasProperty("latitude", equalTo(city.getLatitude()))
-        ));
-
+        );
     }
 }
