@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -40,6 +41,7 @@ public class Parcel {
 
     private double distance;
 
+    @Formula(value = "volume * distance * 0.05")
     private BigDecimal price;
 
 }

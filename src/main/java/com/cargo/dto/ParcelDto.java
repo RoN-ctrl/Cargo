@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Formula;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -46,6 +47,7 @@ public class ParcelDto {
     @Positive(message = "Distance is not valid")
     private double distance;
 
+    @Formula(value = "volume * distance * 0.05")
     private BigDecimal price;
 
 }
