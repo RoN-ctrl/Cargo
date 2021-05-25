@@ -30,7 +30,7 @@ public class Account {
     private String password;
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<Parcel> parcelsAccount;
 
 }
